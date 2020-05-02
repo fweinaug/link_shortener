@@ -1,3 +1,5 @@
+![Firebase Hosting](https://github.com/fweinaug/link_shortener/workflows/Firebase%20Hosting/badge.svg)
+
 # link_shortener
 
 A simple Flutter application which is able to **transform a given https link into a minimized and trackable link**.
