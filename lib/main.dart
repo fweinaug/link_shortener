@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_shortener/router.dart';
 
 void main() {
   runApp(App());
@@ -13,10 +14,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        body: Center(child: Text('Shortie'),
-        ),
-      ),
+      onGenerateRoute: Router.onGenerateRoute,
     );
   }
 }
