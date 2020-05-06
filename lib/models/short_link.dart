@@ -1,30 +1,34 @@
+import 'package:link_shortener/router.dart';
 import 'package:shortid/shortid.dart';
 
 class ShortLink {
   final String ending;
   final String url;
+  final String reportUrl;
   final String redirectUrl;
 
   ShortLink({
     this.ending,
     this.url,
+    this.reportUrl,
     this.redirectUrl,
   });
 
   static ShortLink create(String redirectUrl, {String baseUrl}) {
     if (baseUrl == null || baseUrl.isEmpty) {
-      throw Exception('Unknown baseUrl');
+      return null;
     }
 
     if (!validateUrl(redirectUrl, baseUrl)) {
-      throw Exception('Invalid redirectUrl');
+      return null;
     }
 
     final ending = shortid.generate();
 
     return ShortLink(
       ending: ending,
-      url: buildShortUrl(ending, baseUrl),
+      url: buildShortUrl(baseUrl, ending),
+      reportUrl: buildReportUrl(baseUrl, ending),
       redirectUrl: redirectUrl,
     );
   }
@@ -50,15 +54,4 @@ bool validateUrl(String url, String baseUrl) {
   }
 
   return true;
-}
-
-String buildShortUrl(String baseUrl, String ending) {
-  var url = baseUrl;
-  if (!url.endsWith('/')) {
-    url += '/';
-  }
-
-  url += ending;
-
-  return url;
 }

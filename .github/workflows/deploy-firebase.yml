@@ -23,7 +23,7 @@ jobs:
       run: flutter pub get
 
     - name: Run tests
-      run: flutter test
+      run: flutter test --platform chrome
 
     - name: Enable web support
       run: flutter config --enable-web

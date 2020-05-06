@@ -19,6 +19,8 @@ class Router {
   }
 }
 
+const _reportUrlSymbol = '~';
+
 class LinkData {
   LinkData(this.ending, this.viewReport);
 
@@ -31,11 +33,30 @@ class LinkData {
     String ending = s.replaceAll('/', '');
     bool viewReport = false;
 
-    if (ending.endsWith('~')) {
+    if (ending.endsWith(_reportUrlSymbol)) {
       viewReport = true;
       ending = ending.substring(0, ending.length - 1);
     }
 
     return LinkData(ending, viewReport);
   }
+}
+
+String buildShortUrl(String baseUrl, String ending) {
+  var url = baseUrl;
+  if (!url.endsWith('/')) {
+    url += '/';
+  }
+
+  url += ending;
+
+  return url;
+}
+
+String buildReportUrl(String baseUrl, String ending) {
+  var url = buildShortUrl(baseUrl, ending);
+
+  url += _reportUrlSymbol;
+
+  return url;
 }
