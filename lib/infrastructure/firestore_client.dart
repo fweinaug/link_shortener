@@ -16,7 +16,7 @@ class FirestoreClient {
   Future<String> getRedirectUrl(String ending) async {
     final link = await Firestore.instance.document('links/$ending').get();
 
-    return link != null
+    return link.exists
       ? link.data['url']
       : null;
   }
